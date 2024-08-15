@@ -204,7 +204,7 @@ class VIPayment {
     public function order_game(
         string $service,
         string $data_no,
-        ?string $data_zone
+        ?string $data_zone = null
     ): array 
     {
         $end_point = $this->end_point . '/game-feature';
@@ -284,16 +284,19 @@ class VIPayment {
      * Service Game & Streaming
      * @param string $filter_type (optional | type, brand)
      * @param null|string $filter_value (optional | game, streaming)
+     * @param null|string $filter_status (optional | available / empty)
      * 
      * @return array
      * 
      * @example service_game('type', 'game')
      * @example service_game('brand', 'streaming')
+     * @example service_game('brand', 'streaming', 'available')
      */
 
     public function service_game(
-        ?string $filter_type,
-        ?string $filter_value
+        ?string $filter_type = null,
+        ?string $filter_value = null,
+        ?string $filter_status = null
     ): array
     {
         $end_point = $this->end_point . '/game-feature';
@@ -303,7 +306,8 @@ class VIPayment {
             'sign'=> $this->signature,
             'type'=> 'services',
             'filter_type'=> $filter_type,
-            'filter_value'=> $filter_value
+            'filter_value'=> $filter_value,
+            'filter_status'=> $filter_status
         ];
 
         $request = $this->connect($end_point, $params);
