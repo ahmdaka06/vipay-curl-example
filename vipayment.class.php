@@ -1,7 +1,7 @@
 <?php
 
 // VIPayment Class
-class Vipayment {
+class VIPayment {
     
     // Endpoint API
     public string $end_point = 'https://vip-reseller.co.id/api';
