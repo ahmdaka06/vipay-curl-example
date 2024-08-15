@@ -25,6 +25,7 @@ Tambahkan file `Vipayment.php` ke dalam proyek PHP Anda. Pastikan untuk menyerta
 Buat instance dari class `Vipayment` dengan memberikan `API ID` dan `API Key` yang Anda peroleh dari VIP Reseller.
 
 ```php
+<?php
 require_once 'Vipayment.php';
 
 $vipayment = new Vipayment('API_ID', 'API_KEY');
