@@ -107,7 +107,7 @@ class VIPayment {
     /**
      * Status Prepaid
      * @param string $trxid
-     * @param int $limit (optional)
+     * @param null|int $limit (optional)
      * 
      * @return array
      * 
@@ -150,7 +150,7 @@ class VIPayment {
     /**
      * Service Prepaid
      * @param string $filter_type (optional | type, brand)
-     * @param string $filter_value (optional | pulsa-reguler, telkomsel)
+     * @param null|string $filter_value (optional | pulsa-reguler, telkomsel)
      * 
      * @return array
      * 
@@ -166,7 +166,144 @@ class VIPayment {
 
         $params = [
             'key'=> $this->api_key,
-            'type'=> 'services'
+            'sign'=> $this->signature,
+            'type'=> 'services',
+            'filter_type'=> $filter_type,
+            'filter_value'=> $filter_value
+        ];
+
+        $request = $this->connect($end_point, $params);
+
+        $response = json_decode($request, true);
+
+        if (isset($response['result']) && $response['result'] == false) {
+            return [
+                'status'=> false,
+                'message'=> $response['message']
+            ];
+        }
+
+        return [
+            'status'=> true,
+            'data'=> $response['data'],
+            'message'=> $response['message']
+        ];
+    }
+
+    /**
+     * Order Game & Streaming
+     * @param string $service service code
+     * @param string $data_no target number
+     * @param null|string $data_zone (optional)
+     * 
+     * @return array
+     * 
+     * @example order_game('GARENA', '1234567890', 'ID')
+     * @example order_game('STEAM', '1234567890')
+     */
+    public function order_game(
+        string $service,
+        string $data_no,
+        ?string $data_zone
+    ): array 
+    {
+        $end_point = $this->end_point . '/game-feature';
+
+        $params = [
+            'key'=> $this->api_key,
+            'sign'=> $this->signature,
+            'type'=> 'order',
+            'service'=> $service,
+            'data_no'=> $data_no,
+            'data_zone'=> $data_zone
+        ];
+
+        $request = $this->connect($end_point, $params);
+
+        $response = json_decode($request, true);
+
+        if (isset($response['result']) && $response['result'] == false) {
+            return [
+                'status'=> false,
+                'message'=> $response['message']
+            ];
+        }
+
+        return [
+            'status'=> true,
+            'data'=> $response['data'],
+            'message'=> $response['message']
+        ];
+    }
+
+    /**
+     * Status Game & Streaming
+     * @param string $trxid
+     * @param null|int $limit (optional)
+     * 
+     * @return array
+     * 
+     * @example status_game('1234567890', 1)
+     * @example status_game('1234567890')
+     */
+
+    public function status_game(
+        string $trxid,
+        ?int $limit = null
+    ): array
+    {
+        $end_point = $this->end_point . '/game-feature';
+
+        $params = [
+            'key'=> $this->api_key,
+            'sign'=> $this->signature,
+            'type'=> 'status',
+            'trxid'=> $trxid,
+            'limit'=> $limit
+        ];
+
+        $request = $this->connect($end_point, $params);
+
+        $response = json_decode($request, true);
+
+        if (isset($response['result']) && $response['result'] == false) {
+            return [
+                'status'=> false,
+                'message'=> $response['message']
+            ];
+        }
+
+        return [
+            'status'=> true,
+            'data'=> $response['data'],
+            'message'=> $response['message']
+        ];
+    }
+
+    /**
+     * Service Game & Streaming
+     * @param string $filter_type (optional | type, brand)
+     * @param null|string $filter_value (optional | game, streaming)
+     * 
+     * @return array
+     * 
+     * @example service_game('type', 'game')
+     * @example service_game('brand', 'streaming')
+     */
+
+    public function service_game(
+        ?string $filter_type,
+        ?string $filter_value
+    ): array
+    {
+        $end_point = $this->end_point . '/game-feature';
+
+        $params = [
+            'key'=> $this->api_key,
+            'sign'=> $this->signature,
+            'type'=> 'services',
+            'filter_type'=> $filter_type,
+            'filter_value'=> $filter_value
         ];
 
         $request = $this->connect($end_point, $params);
