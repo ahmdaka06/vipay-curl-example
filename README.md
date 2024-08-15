@@ -26,7 +26,7 @@ Buat instance dari class `Vipayment` dengan memberikan `API ID` dan `API Key` ya
 
 ```php
 <?php
-require_once 'Vipayment.php';
+require_once 'vipayment.class.php';
 
 $vipayment = new Vipayment('API_ID', 'API_KEY');
 
