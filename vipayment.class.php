@@ -63,7 +63,7 @@ class VIPayment {
 
     /**
      * Order Prepaid
-     * @param string $service service code
+     * @param string $service_code service code
      * @param string $data_no target number
      * 
      * @return array
@@ -72,7 +72,7 @@ class VIPayment {
      * @example order_prepaid('PULSA5', '081234567890')
      */
     public function order_prepaid(
-        string $service,
+        string $service_code,
         string $data_no
     ): array 
     {
@@ -82,7 +82,7 @@ class VIPayment {
             'key' => $this->api_key,
             'sign' => $this->signature,
             'type' => 'order',
-            'service' => $service,
+            'service' => $service_code,
             'data_no' => $data_no
         ];
 
@@ -105,16 +105,16 @@ class VIPayment {
     }
 
     /**
-     * Status Prepaid
-     * @param string $trxid
+     * Status Order Prepaid
+     * @param string $trxid transaction id
      * @param null|int $limit (optional)
      * 
      * @return array
      * 
-     * @example status_prepaid('1234567890', 1)
-     * @example status_prepaid('1234567890')
+     * @example status_order_prepaid('1234567890', 1)
+     * @example status_order_prepaid('1234567890')
      */
-    public function status_prepaid(
+    public function status_order_prepaid(
         string $trxid,
         ?int $limit = null
     ): array 
@@ -158,8 +158,8 @@ class VIPayment {
      * @example service_prepaid('brand', 'telkomsel')
      */
     public function service_prepaid(
-        ?string $filter_type,
-        ?string $filter_value
+        ?string $filter_type = null,
+        ?string $filter_value = null
     ): array
     {
         $end_point = $this->end_point . '/prepaid';
@@ -237,17 +237,17 @@ class VIPayment {
     }
 
     /**
-     * Status Game & Streaming
+     * Status Order Game & Streaming
      * @param string $trxid
      * @param null|int $limit (optional)
      * 
      * @return array
      * 
-     * @example status_game('1234567890', 1)
-     * @example status_game('1234567890')
+     * @example status_order_game('1234567890', 1)
+     * @example status_order_game('1234567890')
      */
 
-    public function status_game(
+    public function status_order_game(
         string $trxid,
         ?int $limit = null
     ): array
