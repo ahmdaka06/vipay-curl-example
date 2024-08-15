@@ -1,4 +1,4 @@
-# Vipayment Class
+# VIPayment Class
 
 Vipayment adalah class PHP yang dirancang untuk memfasilitasi integrasi dengan API VIP Reseller. Dengan class ini, Anda dapat mengelola berbagai transaksi pembayaran, seperti mendapatkan informasi profil, melakukan pemesanan layanan prabayar, memeriksa status transaksi, dan mendapatkan daftar layanan prabayar yang tersedia.
 
@@ -16,19 +16,19 @@ Vipayment adalah class PHP yang dirancang untuk memfasilitasi integrasi dengan A
 
 ## Instalasi
 
-Tambahkan file `Vipayment.php` ke dalam proyek PHP Anda. Pastikan untuk menyertakan file tersebut menggunakan `require_once` atau `include_once` di file PHP Anda.
+Tambahkan file `vipayment.class.php` ke dalam proyek PHP Anda. Pastikan untuk menyertakan file tersebut menggunakan `require_once` atau `include_once` di file PHP Anda.
 
 ## Penggunaan
 
 ### 1. Inisialisasi
 
-Buat instance dari class `Vipayment` dengan memberikan `API ID` dan `API Key` yang Anda peroleh dari VIP Reseller.
+Buat instance dari class `VIPayment` dengan memberikan `API ID` dan `API Key` yang Anda peroleh dari VIP Reseller.
 
 ```php
 <?php
 require_once 'vipayment.class.php';
 
-$vipayment = new Vipayment('API_ID', 'API_KEY');
+$vipayment = new VIPayment('API_ID', 'API_KEY');
 
 $profile = $vipayment->profile();
 if ($profile['status']) {
